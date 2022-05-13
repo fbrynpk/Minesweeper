@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentID = square.id
         let total = square.getAttribute('data')
         if(isGameOver) return
-        if(square.classList.contains('clicked') || square.classList.contains('flag')) return
+        if(square.classList.contains('clicked') || square.classList.contains('flags')) return
         if(firstClick != 0 && square.classList.contains('bombs')){
             gameOver(square)
         }else if(firstClick === 0 && square.classList.contains('bombs')){
