@@ -45,3 +45,12 @@ div{
 .four{
     color: blue
 }
+
+#timer {
+    position: absolute;
+    width: 130px;
+    height: 20px;
+    top: 20px;
+    left: 205px;
+    cursor: pointer;
+}

@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(isGameOver) return
         if(!square.classList.contains('clicked') && (flags < bombAmounts)){
             if(!square.classList.contains('flags')){
+                startTimer()
                 square.classList.add('flags')
                 square.innerHTML = '🚩'
                 flags++
@@ -91,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function click(square){
         let currentID = square.id
         let total = square.getAttribute('data')
+        startTimer()
         if(isGameOver) return
         if(square.classList.contains('clicked') || square.classList.contains('flags')) return
         if(firstClick != 0 && square.classList.contains('bombs')){
@@ -182,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newSquare = document.getElementById(newID)
                 click(newSquare)
             }
-        }, 10)
+        })
     }
 
     //game over
@@ -210,5 +212,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 isGameOver = true
             }
         }
+    }
+
+    const timer = document.getElementById('timer');
+    let timerInterval;
+
+    startTimer = () => {
+        clearInterval(timerInterval);
+        let second = 59,
+        minute = 4;
+
+        timerInterval = setInterval(function(){
+
+            timer.innerHTML = 
+                (minute < 10 ? '0' + minute : minute)+
+                ':' +
+                (second < 10 ? '0' + second : second);
+                second--
+
+                if(second === 59 || second < 0){
+                    minute--
+                    second = 58
+                }
+
+                if(minute === 0 && second === 0){
+                    gameOver()
+                    clearInterval(timerInterval)
+                }
+        }, 1000);
     }
 })
